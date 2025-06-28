@@ -11,6 +11,57 @@ class Main {
     swap(arr,0,k-1);
      
     swap(arr,k,n-1);
+    import java.util.*;
+
+public class SeriesAssessment {
+    public static void main(String[] args) {
+        ArrayList<Integer> series = new ArrayList<>();
+        int[] diffs = {3, 8, 13, 20, 21, 28, 31, 33, 38, 47, 52, 59, 61, 62, 73, 79, 82, 91, 103};
+        int current = 1, i = 0;
+        while (series.size() < 100) {
+            series.add(current);
+            current += diffs[i % diffs.length];
+            i++;
+        }
+
+        System.out.println("Level 1 Series:");
+        for (int num : series) System.out.print(num + " ");
+        System.out.println();
+
+        System.out.println("Level 2 Even-Digit Numbers:");
+        for (int num : series) {
+            if (onlyEvenDigits(num)) System.out.print(num + " ");
+        }
+        System.out.println();
+
+        int pairCount = 0;
+        System.out.println("Level 3 Valid Pairs:");
+        for (int k = 0; k < series.size() - 1; k++) {
+            int a = series.get(k), b = series.get(k + 1);
+            if (isPrime(Math.abs(a - b))) {
+                System.out.println("(" + a + ", " + b + ")");
+                pairCount++;
+            }
+        }
+        System.out.println("Total Valid Pairs: " + pairCount);
+    }
+
+    static boolean onlyEvenDigits(int n) {
+        while (n > 0) {
+            if ((n % 10) % 2 != 0) return false;
+            n /= 10;
+        }
+        return true;
+    }
+
+    static boolean isPrime(int n) {
+        if (n < 2) return false;
+        for (int i = 2; i * i <= n; i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+}
      
 }
  public static void swap(int[] arr,int start,int end){
